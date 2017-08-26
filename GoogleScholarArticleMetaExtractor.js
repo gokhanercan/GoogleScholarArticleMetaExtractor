@@ -41,6 +41,7 @@ $("h3[class='gs_rt'] a").mouseover(function(){
  
   //final filename
   var filename = firstAuthorLastName.trim() + yearStr.trim() + "-" + title.trim() + " - " + cites.trim() +"c"+".pdf";
+  filename = filename.replace(":","-").replace(";","").replace("?","").replace("*","").replace("|","").replace("<","").replace(">","");
   
   console.log(filename);
   
