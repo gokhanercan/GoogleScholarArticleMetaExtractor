@@ -2,7 +2,7 @@
 Extracts publication year, author name, number of cites and title of the articles from Google Scholar listing page.
 
 Script helps user to structure filenames of the articles just before saving pdf documents into local computer. 
-It works well on most cases. I use it to keep all articles in my local in consistent filename conventions.
+It works well on most cases. I use it to keep all article filenames consistent in my local folders.
 Code looks like a crap. Who cares.
 
 Default filename format is: "{TwoDigitYear}{FirstAuthorLastName}-{Title} {NrOfCites}c.pdf"</br>
