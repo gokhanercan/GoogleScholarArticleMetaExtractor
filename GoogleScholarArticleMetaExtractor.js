@@ -14,6 +14,7 @@ $.fn.exists = function () {
 function copyToClipboard(text) {
   window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
 }
+
 $("h3[class='gs_rt'] a").mouseover(function(){
   var a = $(this);
   var title = a.text();
@@ -24,15 +25,21 @@ $("h3[class='gs_rt'] a").mouseover(function(){
         return;    
   }
   
-  var citesX = article.find("div[class='gs_fl'] a").first();
-  var cites = citesX.text();
-  cites = cites.replace("Cited by","");
+  //cites
+  var citesX = article.find("div[class='gs_fl'] a");
+  var rawCites = citesX[2].innerText;
+  var cites = rawCites.replace("Cited by","");
+  console.log("cites: " + cites);
+  
   var authorX = article.find("div[class='gs_a']");
   var author = authorX.text();
   var secIndex = author.nthIndexOf(" ",2);  //ikinci boþluk 2. yazar için.
   var firstAuthor = author.substring(0,secIndex).replace(",","");
   var i = firstAuthor.nthIndexOf(" ",1);
   var firstAuthorLastName = firstAuthor.substring(i).trim();
+  firstAuthorLastName = firstAuthorLastName.replace("-","");
+  console.log("author: " + firstAuthorLastName);
+  
   var year = author.replace( /^\D+/g, '');
   year = parseInt(year);
   
@@ -40,10 +47,9 @@ $("h3[class='gs_rt'] a").mouseover(function(){
   var yearStr = year.toString().substr(2,2);
  
   //final filename
-  var filename = firstAuthorLastName.trim() + yearStr.trim() + "-" + title.trim() + " - " + cites.trim() +"c"+".pdf";
+  var filename = firstAuthorLastName.trim() + yearStr.trim() + " - " + title.trim() + " - " + cites.trim() +"c"+".pdf";
   filename = filename.replace(":","-").replace(";","").replace("?","").replace("*","").replace("|","").replace("<","").replace(">","");
-  
-  console.log(filename);
+  console.log("final filename: " + filename);
   
   //append and copy to clipboard TODO: Bunu otomatik yapamadým bi türlü.
   article.append("<textarea onClick='javascript:copyToClipboard(this.value);' class='article' rows='1' cols='200'>" + filename+"</textarea>");
